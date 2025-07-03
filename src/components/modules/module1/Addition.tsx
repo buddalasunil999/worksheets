@@ -1,17 +1,48 @@
-import React from 'react';
-import type { MathProblem } from '../../../utils/mathProblems';
+import React, { useEffect, useState } from 'react';
 
-interface AdditionProps {
-  problems: MathProblem[];
-  currentDate: string;
+// Utility functions and types for Addition problems
+export interface MathProblem {
+  num1: number;
+  num2: number;
+  answer: number;
 }
 
-export function Addition({ problems, currentDate }: AdditionProps) {
+const generateNumber = (min: number, max: number): number => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+export const generateAdditionProblems = (count: number): MathProblem[] => {
+  const problems: MathProblem[] = [];
+  
+  for (let i = 0; i < count; i++) {
+    const num1 = generateNumber(10, 99); // Double digit numbers
+    const num2 = generateNumber(10, 99);
+    const answer = num1 + num2;
+    
+    problems.push({
+      num1,
+      num2,
+      answer,
+    });
+  }
+  
+  return problems;
+};
+
+interface AdditionProps {
+}
+
+export function Addition({ }: AdditionProps) {  
+  const [problems, setProblems] = useState<any[]>([]);
+
+  useEffect(() => {
+      setProblems(generateAdditionProblems(36));
+  }, []);
+
   return (
     <div className="mb-8 print:mb-4">
       <div className="mb-4 text-center">
-        <h2 className="text-xl font-bold">Module 1: Addition Worksheet</h2>
-        <p className="text-sm">{currentDate}</p>
+        <h2 className="text-xl font-bold">Module 1: Addition Worksheet</h2>        
       </div>
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-4">Double-Digit Addition</h3>

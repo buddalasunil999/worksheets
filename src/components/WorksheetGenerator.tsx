@@ -1,26 +1,14 @@
 "use client";
 
-import { generateAdditionProblems, generateSubtractionProblems } from '../utils/mathProblems';
-import type { MathProblem } from '../utils/mathProblems';
 import NumberConceptsWorksheet from './NumberConceptsWorksheet';
 import { Addition } from './modules/module1/Addition';
 import { Subtraction } from './modules/module1/Subtraction';
-
 import { useEffect, useState } from 'react';
 
 export const WorksheetGenerator = () => {
-  const [currentDate, setCurrentDate] = useState('');
-  const [additionProblems, setAdditionProblems] = useState<MathProblem[]>([]);
-  const [subtractionProblems, setSubtractionProblems] = useState<MathProblem[]>([]);
   const [module, setModule] = useState<'module1' | 'module2'>('module1');
   const [lesson, setLesson] = useState<number>(1);
   const [type, setType] = useState<'addition' | 'subtraction'>('addition');
-
-  useEffect(() => {
-    setCurrentDate(new Date().toLocaleDateString());
-    setAdditionProblems(generateAdditionProblems(36));
-    setSubtractionProblems(generateSubtractionProblems(36));
-  }, []);
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -81,17 +69,16 @@ export const WorksheetGenerator = () => {
       </div>
       {/* Module 1: Addition & Subtraction */}
       {module === 'module1' && type === 'addition' && (
-        <Addition problems={additionProblems} currentDate={currentDate} />
+        <Addition />
       )}
       {module === 'module1' && type === 'subtraction' && (
-        <Subtraction problems={subtractionProblems} currentDate={currentDate} />
+        <Subtraction />
       )}
       {/* Module 2: Number Concepts */}
       {module === 'module2' && (
         <div className="mb-8 print:mb-4">
           <div className="mb-4 text-center">
             <h2 className="text-xl font-bold">Module 2: Number Concepts Worksheet</h2>
-            <p className="text-sm">{currentDate}</p>
           </div>
           <NumberConceptsWorksheet lesson={lesson} />
         </div>

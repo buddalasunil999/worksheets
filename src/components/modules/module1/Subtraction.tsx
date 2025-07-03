@@ -1,17 +1,47 @@
-import React from 'react';
-import type { MathProblem } from '../../../utils/mathProblems';
+import React, { useEffect, useState } from 'react';
 
-interface SubtractionProps {
-  problems: MathProblem[];
-  currentDate: string;
+// Utility functions and types for Subtraction problems
+export interface MathProblem {
+  num1: number;
+  num2: number;
+  answer: number;
 }
 
-export function Subtraction({ problems, currentDate }: SubtractionProps) {
+const generateNumber = (min: number, max: number): number => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+export const generateSubtractionProblems = (count: number): MathProblem[] => {
+  const problems: MathProblem[] = [];
+  
+  for (let i = 0; i < count; i++) {
+    const num1 = generateNumber(20, 99);
+    const num2 = generateNumber(10, num1 - 1); // Ensure num2 is smaller than num1
+    const answer = num1 - num2;
+    
+    problems.push({
+      num1,
+      num2,
+      answer,
+    });
+  }
+  
+  return problems;
+};
+
+interface SubtractionProps {
+}
+
+export function Subtraction({ }: SubtractionProps) {  
+  const [problems, setProblems] = useState<any[]>([]);
+
+  useEffect(() => {
+      setProblems(generateSubtractionProblems(36));
+  }, []);
   return (
     <div className="mb-8 print:mb-4">
       <div className="mb-4 text-center">
         <h2 className="text-xl font-bold">Module 1: Subtraction Worksheet</h2>
-        <p className="text-sm">{currentDate}</p>
       </div>
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-4">Double-Digit Subtraction</h3>
