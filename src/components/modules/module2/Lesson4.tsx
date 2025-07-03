@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { generateComparingOrderingProblems } from '../../../utils/numberConcepts';
+export type ComparingOrderingProblem = {
+  a: number;
+  b: number;
+  comparison: '>' | '<' | '=';
+};
 
 interface Lesson4Props {
   limit: number;
@@ -28,4 +32,18 @@ export function Lesson4({ limit, min, max }: Lesson4Props) {
       ))}
     </ul>
   );
+}
+
+export function generateComparingOrderingProblems(count: number): ComparingOrderingProblem[] {
+  const problems: ComparingOrderingProblem[] = [];
+  for (let i = 0; i < count; i++) {
+    const a = Math.floor(Math.random() * 900) + 100;
+    const b = Math.floor(Math.random() * 900) + 100;
+    problems.push({
+      a,
+      b,
+      comparison: a > b ? '>' : a < b ? '<' : '=',
+    });
+  }
+  return problems;
 }

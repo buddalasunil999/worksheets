@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { generateBeforeAfterBetweenProblems } from '../../../utils/numberConcepts';
+export type BeforeAfterBetweenProblem = {
+  before: number;
+  number: number;
+  after: number;
+};
 
 interface Lesson3Props {
   limit: number;
@@ -48,4 +52,17 @@ export function Lesson3({ limit, min, max }: Lesson3Props) {
       </ul>
     </div>
   );
+}
+
+export function generateBeforeAfterBetweenProblems(count: number): BeforeAfterBetweenProblem[] {
+  const problems: BeforeAfterBetweenProblem[] = [];
+  for (let i = 0; i < count; i++) {
+    const num = Math.floor(Math.random() * 198) + 2; // 2 to 199
+    problems.push({
+      before: num - 1,
+      number: num,
+      after: num + 1,
+    });
+  }
+  return problems;
 }

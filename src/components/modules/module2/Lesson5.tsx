@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { generateOrdinalProblems } from '../../../utils/numberConcepts';
-
 interface Lesson5Props {
   limit: number;
   min: number;
@@ -25,4 +23,13 @@ export function Lesson5({ limit, min, max }: Lesson5Props) {
       ))}
     </ul>
   );
+}
+
+export function generateOrdinalProblems(count: number): number[] {
+  const problems: number[] = [];
+  for (let i = 0; i < count; i++) {
+    const num = Math.floor(Math.random() * 190) + 11; // 11 to 200
+    problems.push(num);
+  }
+  return problems;
 }

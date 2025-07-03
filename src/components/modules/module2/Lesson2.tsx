@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { generateExpandedStandardProblems } from '../../../utils/numberConcepts';
+export type ExpandedStandardProblem = {
+  number: number;
+  expanded: string;
+};
 
 interface Lesson2Props {
   limit: number;
@@ -25,4 +28,18 @@ export function Lesson2({ limit, min, max }: Lesson2Props) {
       ))}
     </ul>
   );
+}
+
+export function generateExpandedStandardProblems(count: number): ExpandedStandardProblem[] {
+  const problems: ExpandedStandardProblem[] = [];
+  for (let i = 0; i < count; i++) {
+    const num = Math.floor(Math.random() * 900) + 100;
+    const digits = num.toString().split('').map(Number);
+    const expanded = `${digits[0]}00 + ${digits[1]}0 + ${digits[2]}`;
+    problems.push({
+      number: num,
+      expanded,
+    });
+  }
+  return problems;
 }
