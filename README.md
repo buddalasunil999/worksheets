@@ -46,3 +46,17 @@ This project is a web app for generating printable math worksheets. It features:
 - Built with Next.js and React
 
 Great for teachers, parents, or students needing quick math practice sheets for a variety of number concepts and pattern recognition!
+
+## Project Structure
+
+The project is organized by modules, each in its own folder under `src/components/modules/`. Each module contains:
+
+- **One component for each lesson** (e.g., `Lesson1.tsx`, `Lesson2.tsx`, etc.)
+  - Each lesson component should provide an example problem with a solution, to demonstrate the concept or skill being taught.
+- **A worksheet component for the module** (e.g., `Module1Worksheet.tsx`)
+
+For example, `src/components/modules/module2/` contains:
+  - `Lesson1.tsx`, `Lesson2.tsx`, ..., `Lesson6.tsx` (one for each lesson)
+  - `Module2Worksheet.tsx` (worksheet for the module)
+
+When adding a new module, create a new folder under `src/components/modules/` (e.g., `module4/`), add a component for each lesson (with an example solved problem in each), and a worksheet component for the module.
