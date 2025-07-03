@@ -3,6 +3,8 @@
 import { generateAdditionProblems, generateSubtractionProblems } from '../utils/mathProblems';
 import type { MathProblem } from '../utils/mathProblems';
 import NumberConceptsWorksheet from './NumberConceptsWorksheet';
+import { Addition } from './modules/module1/Addition';
+import { Subtraction } from './modules/module1/Subtraction';
 
 import { useEffect, useState } from 'react';
 
@@ -10,8 +12,9 @@ export const WorksheetGenerator = () => {
   const [currentDate, setCurrentDate] = useState('');
   const [additionProblems, setAdditionProblems] = useState<MathProblem[]>([]);
   const [subtractionProblems, setSubtractionProblems] = useState<MathProblem[]>([]);
-  const [type, setType] = useState<'addition' | 'subtraction' | 'numberConcept'>('addition');
+  const [module, setModule] = useState<'module1' | 'module2'>('module1');
   const [lesson, setLesson] = useState<number>(1);
+  const [type, setType] = useState<'addition' | 'subtraction'>('addition');
 
   useEffect(() => {
     setCurrentDate(new Date().toLocaleDateString());
@@ -24,25 +27,35 @@ export const WorksheetGenerator = () => {
       <div className="print:hidden">
         <div className="flex gap-2 mt-8 mb-4">
           <button
-            onClick={() => setType('addition')}
-            className={`px-4 py-2 rounded ${type === 'addition' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+            onClick={() => setModule('module1')}
+            className={`px-4 py-2 rounded ${module === 'module1' ? 'bg-blue-700 text-white' : 'bg-gray-200'}`}
           >
-            Addition
+            Module 1: Addition & Subtraction
           </button>
           <button
-            onClick={() => setType('subtraction')}
-            className={`px-4 py-2 rounded ${type === 'subtraction' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+            onClick={() => setModule('module2')}
+            className={`px-4 py-2 rounded ${module === 'module2' ? 'bg-blue-700 text-white' : 'bg-gray-200'}`}
           >
-            Subtraction
-          </button>
-          <button
-            onClick={() => setType('numberConcept')}
-            className={`px-4 py-2 rounded ${type === 'numberConcept' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-          >
-            Number Concepts
+            Module 2: Number Concepts
           </button>
         </div>
-        {type === 'numberConcept' && (
+        {module === 'module1' && (
+          <div className="flex gap-2 mb-4">
+            <button
+              onClick={() => setType('addition')}
+              className={`px-4 py-2 rounded ${type === 'addition' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+            >
+              Addition
+            </button>
+            <button
+              onClick={() => setType('subtraction')}
+              className={`px-4 py-2 rounded ${type === 'subtraction' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+            >
+              Subtraction
+            </button>
+          </div>
+        )}
+        {module === 'module2' && (
           <div className="mb-4">
             <label className="font-semibold mr-2">Select Lesson:</label>
             <select
@@ -66,62 +79,18 @@ export const WorksheetGenerator = () => {
           Print Worksheet
         </button>
       </div>
-      {type === 'addition' && (
-        <div className="mb-8 print:mb-4">
-          <div className="mb-4 text-center">
-            <h2 className="text-xl font-bold">Math Worksheet</h2>
-            <p className="text-sm">{currentDate}</p>
-          </div>
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-4">Double-Digit Addition</h3>
-            <div className="grid grid-cols-6 gap-6">
-              {additionProblems.map((problem, index) => (
-                <div key={index} className="p-4 border rounded">
-                  <div className="text-center">
-                    <div className="font-mono">
-                      <div className="text-right">{problem.num1}</div>
-                      <div className="text-right">+ {problem.num2}</div>
-                      <div className="border-t border-black mt-1 pt-1">
-                        {index === 0 && <div className="text-right">{problem.answer}</div>}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      {/* Module 1: Addition & Subtraction */}
+      {module === 'module1' && type === 'addition' && (
+        <Addition problems={additionProblems} currentDate={currentDate} />
       )}
-      {type === 'subtraction' && (
-        <div className="mb-8 print:mb-4">
-          <div className="mb-4 text-center">
-            <h2 className="text-xl font-bold">Math Worksheet - Part 2</h2>
-            <p className="text-sm">{currentDate}</p>
-          </div>
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-4">Double-Digit Subtraction</h3>
-            <div className="grid grid-cols-6 gap-6">
-              {subtractionProblems.map((problem, index) => (
-                <div key={index} className="p-4 border rounded">
-                  <div className="text-center">
-                    <div className="font-mono">
-                      <div className="text-right">{problem.num1}</div>
-                      <div className="text-right">- {problem.num2}</div>
-                      <div className="border-t border-black mt-1 pt-1">
-                        {index === 0 && <div className="text-right">{problem.answer}</div>}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      {module === 'module1' && type === 'subtraction' && (
+        <Subtraction problems={subtractionProblems} currentDate={currentDate} />
       )}
-      {type === 'numberConcept' && (
+      {/* Module 2: Number Concepts */}
+      {module === 'module2' && (
         <div className="mb-8 print:mb-4">
           <div className="mb-4 text-center">
-            <h2 className="text-xl font-bold">Number Concepts Worksheet</h2>
+            <h2 className="text-xl font-bold">Module 2: Number Concepts Worksheet</h2>
             <p className="text-sm">{currentDate}</p>
           </div>
           <NumberConceptsWorksheet lesson={lesson} />

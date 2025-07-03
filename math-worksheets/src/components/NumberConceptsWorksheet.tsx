@@ -7,10 +7,17 @@ import {
   generateOrdinalProblems,
   generateEvenOddProblems,
 } from '../utils/numberConcepts';
+import { Lesson1 } from './modules/module2/Lesson1';
+import { Lesson2 } from './modules/module2/Lesson2';
+import { Lesson3 } from './modules/module2/Lesson3';
+import { Lesson4 } from './modules/module2/Lesson4';
+import { Lesson5 } from './modules/module2/Lesson5';
+import { Lesson6 } from './modules/module2/Lesson6';
 
 interface WorksheetProps {
   lesson: number;
 }
+
 
 const LESSON_TITLES = [
   '',
@@ -23,65 +30,57 @@ const LESSON_TITLES = [
 ];
 
 export default function NumberConceptsWorksheet({ lesson }: WorksheetProps) {
-  let problems;
-  switch (lesson) {
-    case 1:
-      problems = generateFacePlaceValueProblems(20);
-      break;
-    case 2:
-      problems = generateExpandedStandardProblems(20);
-      break;
-    case 3:
-      problems = generateBeforeAfterBetweenProblems(20);
-      break;
-    case 4:
-      problems = generateComparingOrderingProblems(20);
-      break;
-    case 5:
-      problems = generateOrdinalProblems(20);
-      break;
-    case 6:
-      problems = generateEvenOddProblems(20);
-      break;
-    default:
-      problems = [];
-  }
-
   return (
     <div className="worksheet">
       <h2>{`Lesson ${lesson}: ${LESSON_TITLES[lesson]}`}</h2>
-      <ul>
-        {lesson === 1 && problems.map((p, i) => (
-          <li key={i}>
-            Number: <b>{p.number}</b> — Hundreds: ___ Tens: ___ Ones: ___
-          </li>
-        ))}
-        {lesson === 2 && problems.map((p, i) => (
-          <li key={i}>
-            Number: <b>{p.number}</b> — Expanded form: __________
-          </li>
-        ))}
-        {lesson === 3 && problems.map((p, i) => (
-          <li key={i}>
-            Before: ___ Number: <b>{p.number}</b> After: ___
-          </li>
-        ))}
-        {lesson === 4 && problems.map((p, i) => (
-          <li key={i}>
-            {p.a} ___ {p.b}
-          </li>
-        ))}
-        {lesson === 5 && problems.map((num, i) => (
-          <li key={i}>
-            {num}th: __________
-          </li>
-        ))}
-        {lesson === 6 && problems.map((p, i) => (
-          <li key={i}>
-            Number: <b>{p.number}</b> — Even or Odd? __________
-          </li>
-        ))}
-      </ul>
+      {lesson === 1 && (
+        <Lesson1
+          limit={20}
+          min={100}
+          max={200}
+          generateFacePlaceValueProblems={generateFacePlaceValueProblems}
+        />
+      )}
+      {lesson === 2 && (
+        <Lesson2
+          limit={20}
+          min={100}
+          max={200}
+          generateExpandedStandardProblems={generateExpandedStandardProblems}
+        />
+      )}
+      {lesson === 3 && (
+        <Lesson3
+          limit={40}
+          min={100}
+          max={200}
+          generateBeforeAfterBetweenProblems={generateBeforeAfterBetweenProblems}
+        />
+      )}
+      {lesson === 4 && (
+        <Lesson4
+          limit={20}
+          min={100}
+          max={200}
+          generateComparingOrderingProblems={generateComparingOrderingProblems}
+        />
+      )}
+      {lesson === 5 && (
+        <Lesson5
+          limit={20}
+          min={11}
+          max={200}
+          generateOrdinalProblems={generateOrdinalProblems}
+        />
+      )}
+      {lesson === 6 && (
+        <Lesson6
+          limit={20}
+          min={100}
+          max={200}
+          generateEvenOddProblems={generateEvenOddProblems}
+        />
+      )}
     </div>
   );
 }

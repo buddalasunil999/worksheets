@@ -24,15 +24,18 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 This project is a web app for generating printable math worksheets. It features:
 
+### Module 1: Addition & Subtraction
 - Randomly generated double-digit addition and subtraction problems
 - Two worksheet pages: one for addition, one for subtraction (36 problems each)
-- Worksheets for number concepts:
-  - Lesson 1: Face Value and Place Value
-  - Lesson 2: Expanded and Standard Forms
-  - Lesson 3: Before, After, and Between (up to 200)
-  - Lesson 4: Comparing and Ordering Numbers
-  - Lesson 5: Ordinal Numbers (11 to 200)
-  - Lesson 6: Even and Odd Numbers
+
+### Module 2: Number Concepts (Lessons 1–6)
+- Lesson 1: Place and Face Value — Explains a digit's place and face value in numbers between 100 and 200.
+- Lesson 2: Expanded and Standard Forms — Covers representing and converting numbers between 100 and 200 in expanded and standard forms.
+- Lesson 3: Before, After, and Between — Identifies numbers that come before, after, or between given numbers within 100–200 to build number sense and sequencing.
+- Lesson 4: Comparing and Ordering Numbers — Compares numbers in the 100–200 range and practices ordering (seriation) in ascending and descending order.
+- Lesson 5: Ordinal Numbers (11th–200th) — Identifies ordinal and cardinal numbers in real-life contexts and practices writing ordinal positions in words and numerals.
+- Lesson 6: Even and Odd Numbers — Classifies numbers between 100 and 200 as even or odd by grouping or dividing by 2.
+
 - A "Print Worksheet" button for easy printing
 - Built with Next.js and React
 
