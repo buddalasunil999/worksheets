@@ -22,11 +22,18 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## What This Project Does
 
-This project is a web app for generating printable double-digit addition and subtraction math worksheets. It features:
+This project is a web app for generating printable math worksheets. It features:
 
 - Randomly generated double-digit addition and subtraction problems
-- Two worksheet pages: one for addition, one for subtraction (15 problems each)
+- Two worksheet pages: one for addition, one for subtraction (36 problems each)
+- Worksheets for number concepts:
+  - Lesson 1: Face Value and Place Value
+  - Lesson 2: Expanded and Standard Forms
+  - Lesson 3: Before, After, and Between (up to 200)
+  - Lesson 4: Comparing and Ordering Numbers
+  - Lesson 5: Ordinal Numbers (11 to 200)
+  - Lesson 6: Even and Odd Numbers
 - A "Print Worksheet" button for easy printing
 - Built with Next.js and React
 
-Great for teachers, parents, or students needing quick math practice sheets!
+Great for teachers, parents, or students needing quick math practice sheets for a variety of number concepts!
