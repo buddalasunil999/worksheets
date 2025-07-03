@@ -1,0 +1,58 @@
+import React from 'react';
+
+function generateSkip5Problems(count: number, maxLimit: number) {
+  const problems = [];
+  for (let i = 0; i < count; i++) {
+    // Find the highest possible start so the sequence doesn't exceed maxLimit
+    const maxStart = Math.floor((maxLimit - 25) / 5) * 5;
+    const minStart = 100;
+    const range = Math.max(0, (maxStart - minStart) / 5 + 1);
+    const start = range > 0 ? Math.floor(Math.random() * range) * 5 + minStart : minStart;
+    const sequence = [];
+    for (let j = 0; j < 6; j++) {
+      const value = start + 5 * j;
+      if (value > maxLimit) {
+        sequence.push(null);
+      } else if (j === 2 || j === 4) {
+        sequence.push(null);
+      } else {
+        sequence.push(value);
+      }
+    }
+    problems.push({ sequence });
+  }
+  return problems;
+}
+
+interface Lesson2Props {
+  count: number;
+  maxLimit: number;
+}
+
+const Lesson2: React.FC<Lesson2Props> = ({ count, maxLimit }) => {
+  const problems = generateSkip5Problems(count, maxLimit);
+  return (
+    <div>
+      <h3 className="text-lg font-semibold mb-2">Lesson 2: Skip-Counting by 5s</h3>
+      <p className="mb-2">Fill in the missing numbers (count by 5s):</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 print-grid-2">
+        {problems.map((p, i) => (
+          <div key={i} className="mb-2">
+            <ul className="ml-6">
+              <li>
+                {p.sequence.map((n, idx) => (
+                  <React.Fragment key={idx}>
+                    {idx > 0 && ', '}
+                    {n === null ? <b>___</b> : <span>{n}</span>}
+                  </React.Fragment>
+                ))}
+              </li>
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Lesson2;

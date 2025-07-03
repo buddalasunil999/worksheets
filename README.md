@@ -36,7 +36,13 @@ This project is a web app for generating printable math worksheets. It features:
 - Lesson 5: Ordinal Numbers (11th–200th) — Identifies ordinal and cardinal numbers in real-life contexts and practices writing ordinal positions in words and numerals.
 - Lesson 6: Even and Odd Numbers — Classifies numbers between 100 and 200 as even or odd by grouping or dividing by 2.
 
+### Module 3: Recognizing Patterns in Hundreds (Lessons 1–4)
+- Lesson 1: Recognizing Patterns in Hundreds — Identify and predict number patterns in the hundreds using incremental changes and place values.
+- Lesson 2: Skip-Counting by 5s — Develop fluency in skip-counting by 5s up to 999. Recognize patterns and apply skip-counting in real-life scenarios like counting money.
+- Lesson 3: Skip-Counting by 10s — Practice skip-counting by 10s up to 999. Explanation of shifts in the tens place and connect skip-counting to addition and multiplication concepts.
+- Lesson 4: Skip-Counting by 100's — Skip-counting by 100's up to 999. Recognize the relationship between hundreds and larger numbers. Develop place value skills.
+
 - A "Print Worksheet" button for easy printing
 - Built with Next.js and React
 
-Great for teachers, parents, or students needing quick math practice sheets for a variety of number concepts!
+Great for teachers, parents, or students needing quick math practice sheets for a variety of number concepts and pattern recognition!
