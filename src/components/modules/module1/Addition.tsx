@@ -11,12 +11,12 @@ const generateNumber = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-export const generateAdditionProblems = (count: number): MathProblem[] => {
+export const generateAdditionProblems = (count: number, max: number): MathProblem[] => {
   const problems: MathProblem[] = [];
   
   for (let i = 0; i < count; i++) {
-    const num1 = generateNumber(10, 99); // Double digit numbers
-    const num2 = generateNumber(10, 99);
+    const num1 = generateNumber(10, max - 1); // Double digit numbers
+    const num2 = generateNumber(10, max - 1);
     const answer = num1 + num2;
     
     problems.push({
@@ -30,14 +30,16 @@ export const generateAdditionProblems = (count: number): MathProblem[] => {
 };
 
 interface AdditionProps {
+  numberOfLessons?: number;
+  max?: number;
 }
 
-export function Addition({ }: AdditionProps) {  
+export function Addition({ numberOfLessons = 10, max = 100 }: AdditionProps) {  
   const [problems, setProblems] = useState<any[]>([]);
 
   useEffect(() => {
-      setProblems(generateAdditionProblems(36));
-  }, []);
+      setProblems(generateAdditionProblems(numberOfLessons, max));
+  }, [max]);
 
   return (
     <div className="mb-8 print:mb-4">

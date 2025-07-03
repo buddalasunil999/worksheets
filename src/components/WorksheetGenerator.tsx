@@ -1,8 +1,7 @@
 "use client";
 
-import NumberConceptsWorksheet from './modules/module2/NumberConceptsWorksheet';
-import { Addition } from './modules/module1/Addition';
-import { Subtraction } from './modules/module1/Subtraction';
+import Module2Worksheet from './modules/module2/Module2Worksheet';
+import Module1Worksheet from './modules/module1/Module1Worksheet';
 import { useState } from 'react';
 import Module3Worksheet from './modules/module3/Module3Worksheet';
 
@@ -75,11 +74,8 @@ export const WorksheetGenerator = () => {
         )}
       </div>
       {/* Module 1: Addition & Subtraction */}
-      {module === 'module1' && type === 'addition' && (
-        <Addition />
-      )}
-      {module === 'module1' && type === 'subtraction' && (
-        <Subtraction />
+      {module === 'module1' && (
+        <Module1Worksheet type={type} />
       )}
       {/* Module 2: Number Concepts */}
       {module === 'module2' && (
@@ -87,7 +83,7 @@ export const WorksheetGenerator = () => {
           <div className="mb-4 text-center">
             <h2 className="text-xl font-bold">Module 2: Number Concepts Worksheet</h2>
           </div>
-          <NumberConceptsWorksheet lesson={lesson} />
+          <Module2Worksheet lesson={lesson} />
         </div>
       )}
       {/* Module 3: Recognizing Patterns in Hundreds */}

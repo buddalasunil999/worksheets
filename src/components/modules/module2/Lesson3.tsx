@@ -20,10 +20,22 @@ export function Lesson3({ limit, min, max }: Lesson3Props) {
     } while (p.number < min || p.number > max);
     return p;
   });
+  // Example (first problem, solved)
+  const example = problems[0];
+  // For the example, show all values filled in
+  const exampleDisplay = (
+    <li key={0} style={{ marginBottom: '1em' }}>
+      <b>Example:</b> {example.before}, <b>{example.number}</b>, {example.after}
+    </li>
+  );
+  // The rest for students to solve, split into two columns
+  const rest = problems.slice(1);
+  const half = Math.ceil(rest.length / 2);
   return (
     <div style={{ display: 'flex', gap: '2rem' }}>
       <ul style={{ flex: 1 }}>
-        {problems.slice(0, limit / 2).map((p, i) => {
+        {exampleDisplay}
+        {rest.slice(0, half).map((p, i) => {
           const blankType = Math.floor(Math.random() * 3);
           let display;
           if (blankType === 0) {
@@ -33,11 +45,11 @@ export function Lesson3({ limit, min, max }: Lesson3Props) {
           } else {
             display = <>{p.before}, {p.number}, ___</>;
           }
-          return <li key={i}>{display}</li>;
+          return <li key={i + 1}>{display}</li>;
         })}
       </ul>
       <ul style={{ flex: 1 }}>
-        {problems.slice(limit / 2, limit).map((p, i) => {
+        {rest.slice(half).map((p, i) => {
           const blankType = Math.floor(Math.random() * 3);
           let display;
           if (blankType === 0) {
@@ -47,7 +59,7 @@ export function Lesson3({ limit, min, max }: Lesson3Props) {
           } else {
             display = <>{p.before}, {p.number}, ___</>;
           }
-          return <li key={i + limit / 2}>{display}</li>;
+          return <li key={i + 1 + half}>{display}</li>;
         })}
       </ul>
     </div>

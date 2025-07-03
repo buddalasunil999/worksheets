@@ -31,13 +31,32 @@ interface Lesson3Props {
 
 const Lesson3: React.FC<Lesson3Props> = ({ count, maxLimit }) => {
   const problems = generateSkip10Problems(count, maxLimit);
+  const example = problems[0];
+  function getExampleValue(idx: number) {
+    const start = example.sequence.find((v) => v !== null) ?? 0;
+    return start + 10 * idx;
+  }
   return (
     <div>
       <h3 className="text-lg font-semibold mb-2">Lesson 3: Skip-Counting by 10s</h3>
       <p className="mb-2">Fill in the missing numbers (count by 10s):</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 print-grid-2">
-        {problems.map((p, i) => (
-          <div key={i} className="mb-2">
+        {/* Example */}
+        <div className="mb-2">
+          <ul className="ml-6">
+            <li>
+              <b>Example:</b> {example.sequence.map((n, idx) => (
+                <React.Fragment key={idx}>
+                  {idx > 0 && ', '}
+                  <b>{n === null ? getExampleValue(idx) : n}</b>
+                </React.Fragment>
+              ))}
+            </li>
+          </ul>
+        </div>
+        {/* The rest for students to solve */}
+        {problems.slice(1).map((p, i) => (
+          <div key={i + 1} className="mb-2">
             <ul className="ml-6">
               <li>
                 {p.sequence.map((n, idx) => (

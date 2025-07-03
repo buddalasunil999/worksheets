@@ -21,9 +21,14 @@ export function Lesson2({ limit, min, max }: Lesson2Props) {
   });
   return (
     <ul>
-      {problems.map((p, i) => (
-        <li key={i}>
-          Number: <b>{p.number}</b> &mdash; Expanded form: __________ | Standard form: __________
+      {/* Example (first problem, solved) */}
+      <li key={0} style={{ marginBottom: '1em' }}>
+        <b>Example:</b> Number: <b>{problems[0].number}</b> — Expanded form: <b>{problems[0].expanded}</b> | Standard form: <b>{problems[0].number}</b>
+      </li>
+      {/* The rest for students to solve */}
+      {problems.slice(1).map((p, i) => (
+        <li key={i + 1}>
+          Number: <b>{p.number}</b> — Expanded form: __________ | Standard form: __________
         </li>
       ))}
     </ul>

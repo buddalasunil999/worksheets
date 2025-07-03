@@ -25,8 +25,13 @@ export function Lesson4({ limit, min, max }: Lesson4Props) {
   });
   return (
     <ul>
-      {problems.map((p, i) => (
-        <li key={i}>
+      {/* Example (first problem, solved) */}
+      <li key={0} style={{ marginBottom: '1em' }}>
+        <b>Example:</b> Compare: {problems[0].a} <b>{problems[0].comparison}</b> {problems[0].b} | Order: <b>{[problems[0].a, problems[0].b].sort((x, y) => x - y).join(', ')}</b>
+      </li>
+      {/* The rest for students to solve */}
+      {problems.slice(1).map((p, i) => (
+        <li key={i + 1}>
           Compare: {p.a} ___ {p.b} | Order: __________
         </li>
       ))}

@@ -21,9 +21,14 @@ export function Lesson6({ limit, min, max }: Lesson6Props) {
   });
   return (
     <ul>
-      {problems.map((p, i) => (
-        <li key={i}>
-          Number: <b>{p.number}</b> &mdash; Even or Odd? __________ (Show by grouping/dividing by 2)
+      {/* Example (first problem, solved) */}
+      <li key={0} style={{ marginBottom: '1em' }}>
+        <b>Example:</b> Number: <b>{problems[0].number}</b> — Even or Odd? <b>{problems[0].type}</b> (Show by grouping/dividing by 2)
+      </li>
+      {/* The rest for students to solve */}
+      {problems.slice(1).map((p, i) => (
+        <li key={i + 1}>
+          Number: <b>{p.number}</b> — Even or Odd? __________ (Show by grouping/dividing by 2)
         </li>
       ))}
     </ul>
