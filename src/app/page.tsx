@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { WorksheetGenerator } from "../components/WorksheetGenerator";
+// import { WorksheetGenerator } from "../components/WorksheetGenerator";
 
 export default function Home() {
   return (

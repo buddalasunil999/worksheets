@@ -30,8 +30,8 @@ export const generateSubtractionProblems = (count: number): MathProblem[] => {
   const problems: MathProblem[] = [];
   
   for (let i = 0; i < count; i++) {
-    let num1 = generateNumber(20, 99);
-    let num2 = generateNumber(10, num1 - 1); // Ensure num2 is smaller than num1
+    const num1 = generateNumber(20, 99);
+    const num2 = generateNumber(10, num1 - 1); // Ensure num2 is smaller than num1
     const answer = num1 - num2;
     
     problems.push({
