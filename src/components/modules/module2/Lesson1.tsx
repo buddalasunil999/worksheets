@@ -1,13 +1,14 @@
 import React from 'react';
 
+import { generateFacePlaceValueProblems } from '../../../utils/numberConcepts';
+
 interface Lesson1Props {
   limit: number;
   min: number;
   max: number;
-  generateFacePlaceValueProblems: (n: number) => any[];
 }
 
-export function Lesson1({ limit, min, max, generateFacePlaceValueProblems }: Lesson1Props) {
+export function Lesson1({ limit, min, max }: Lesson1Props) {
   const problems = Array.from({ length: limit }, () => {
     let p;
     do {

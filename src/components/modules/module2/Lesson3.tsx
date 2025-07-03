@@ -1,13 +1,14 @@
 import React from 'react';
 
+import { generateBeforeAfterBetweenProblems } from '../../../utils/numberConcepts';
+
 interface Lesson3Props {
   limit: number;
   min: number;
   max: number;
-  generateBeforeAfterBetweenProblems: (n: number) => any[];
 }
 
-export function Lesson3({ limit, min, max, generateBeforeAfterBetweenProblems }: Lesson3Props) {
+export function Lesson3({ limit, min, max }: Lesson3Props) {
   const problems = Array.from({ length: limit }, () => {
     let p;
     do {

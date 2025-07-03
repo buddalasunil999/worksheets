@@ -1,13 +1,14 @@
 import React from 'react';
 
+import { generateComparingOrderingProblems } from '../../../utils/numberConcepts';
+
 interface Lesson4Props {
   limit: number;
   min: number;
   max: number;
-  generateComparingOrderingProblems: (n: number) => any[];
 }
 
-export function Lesson4({ limit, min, max, generateComparingOrderingProblems }: Lesson4Props) {
+export function Lesson4({ limit, min, max }: Lesson4Props) {
   const problems = Array.from({ length: limit }, () => {
     let p;
     do {

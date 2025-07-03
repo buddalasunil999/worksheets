@@ -1,13 +1,14 @@
 import React from 'react';
 
+import { generateOrdinalProblems } from '../../../utils/numberConcepts';
+
 interface Lesson5Props {
   limit: number;
   min: number;
   max: number;
-  generateOrdinalProblems: (n: number) => any[];
 }
 
-export function Lesson5({ limit, min, max, generateOrdinalProblems }: Lesson5Props) {
+export function Lesson5({ limit, min, max }: Lesson5Props) {
   const problems = Array.from({ length: limit }, () => {
     let num;
     do {

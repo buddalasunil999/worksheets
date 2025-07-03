@@ -1,13 +1,14 @@
 import React from 'react';
 
+import { generateExpandedStandardProblems } from '../../../utils/numberConcepts';
+
 interface Lesson2Props {
   limit: number;
   min: number;
   max: number;
-  generateExpandedStandardProblems: (n: number) => any[];
 }
 
-export function Lesson2({ limit, min, max, generateExpandedStandardProblems }: Lesson2Props) {
+export function Lesson2({ limit, min, max }: Lesson2Props) {
   const problems = Array.from({ length: limit }, () => {
     let p;
     do {

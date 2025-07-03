@@ -1,12 +1,4 @@
 import React from 'react';
-import {
-  generateFacePlaceValueProblems,
-  generateExpandedStandardProblems,
-  generateBeforeAfterBetweenProblems,
-  generateComparingOrderingProblems,
-  generateOrdinalProblems,
-  generateEvenOddProblems,
-} from '../utils/numberConcepts';
 import { Lesson1 } from './modules/module2/Lesson1';
 import { Lesson2 } from './modules/module2/Lesson2';
 import { Lesson3 } from './modules/module2/Lesson3';
@@ -34,52 +26,22 @@ export default function NumberConceptsWorksheet({ lesson }: WorksheetProps) {
     <div className="worksheet">
       <h2>{`Lesson ${lesson}: ${LESSON_TITLES[lesson]}`}</h2>
       {lesson === 1 && (
-        <Lesson1
-          limit={20}
-          min={100}
-          max={200}
-          generateFacePlaceValueProblems={generateFacePlaceValueProblems}
-        />
+        <Lesson1 limit={20} min={100} max={200} />
       )}
       {lesson === 2 && (
-        <Lesson2
-          limit={20}
-          min={100}
-          max={200}
-          generateExpandedStandardProblems={generateExpandedStandardProblems}
-        />
+        <Lesson2 limit={20} min={100} max={200} />
       )}
       {lesson === 3 && (
-        <Lesson3
-          limit={40}
-          min={100}
-          max={200}
-          generateBeforeAfterBetweenProblems={generateBeforeAfterBetweenProblems}
-        />
+        <Lesson3 limit={40} min={100} max={200} />
       )}
       {lesson === 4 && (
-        <Lesson4
-          limit={20}
-          min={100}
-          max={200}
-          generateComparingOrderingProblems={generateComparingOrderingProblems}
-        />
+        <Lesson4 limit={20} min={100} max={200} />
       )}
       {lesson === 5 && (
-        <Lesson5
-          limit={20}
-          min={11}
-          max={200}
-          generateOrdinalProblems={generateOrdinalProblems}
-        />
+        <Lesson5 limit={20} min={11} max={200} />
       )}
       {lesson === 6 && (
-        <Lesson6
-          limit={20}
-          min={100}
-          max={200}
-          generateEvenOddProblems={generateEvenOddProblems}
-        />
+        <Lesson6 limit={20} min={100} max={200} />
       )}
     </div>
   );
