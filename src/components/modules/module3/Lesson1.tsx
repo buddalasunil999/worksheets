@@ -1,17 +1,17 @@
 import React from 'react';
 
-function generatePatternProblems(count: number, maxLimit: number) {
+function generatePatternProblems(limit: number, max: number) {
   // Each problem is a sequence with a missing number, e.g., 301, 302, __, 304, __, 306
   const problems = [];
-  for (let i = 0; i < count; i++) {
-    // Ensure the sequence stays within 0 and maxLimit
-    const maxStart = Math.max(0, maxLimit - 5 * 3); // 5 steps of max step 3
+  for (let i = 0; i < limit; i++) {
+    // Ensure the sequence stays within 0 and max
+    const maxStart = Math.max(0, max - 5 * 3); // 5 steps of max step 3
     const start = Math.floor(Math.random() * (maxStart + 1));
     const step = Math.floor(Math.random() * 3) + 1; // step 1, 2, or 3
     const sequence = [];
     for (let j = 0; j < 6; j++) {
       const value = start + step * j;
-      if (value > maxLimit) {
+      if (value > max) {
         sequence.push(null);
       } else if (j === 2 || j === 4) {
         sequence.push(null);
@@ -25,12 +25,12 @@ function generatePatternProblems(count: number, maxLimit: number) {
 }
 
 interface Lesson1Props {
-  count: number;
-  maxLimit: number;
+  limit: number;
+  max: number;
 }
 
-const Lesson1: React.FC<Lesson1Props> = ({ count, maxLimit }) => {
-  const problems = generatePatternProblems(count, maxLimit);
+const Lesson1: React.FC<Lesson1Props> = ({ limit, max }) => {
+  const problems = generatePatternProblems(limit, max);
   // Example (first problem, solved)
   const example = problems[0];
   // Helper to fill in missing numbers for the example

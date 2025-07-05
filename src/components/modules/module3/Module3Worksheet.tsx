@@ -4,28 +4,53 @@ import Lesson2 from './Lesson2';
 import Lesson3 from './Lesson3';
 import Lesson4 from './Lesson4';
 
-
-interface Module3WorksheetProps {
-  lesson: number;
-}
+import { useWorksheet, defaultModules } from '../../WorksheetContext';
 
 
-export const Module3Worksheet: React.FC<Module3WorksheetProps> = ({ lesson }) => {
-  const count = 25; // Default count for problems
-  const maxLimit = 1000;
+export const Module3Worksheet: React.FC = () => {
+  const { selectedLessonId, setSelectedLessonId } = useWorksheet();
+  const lessons = defaultModules.find((m: any) => m.id === 3)?.lessons || [];
+  const selectedLesson = lessons.find((lesson: any) => lesson.id === selectedLessonId);
+  const limit = selectedLesson?.limit ?? 25;
+  const max = selectedLesson?.max ?? 1000;
 
-  switch (lesson) {
+  let lessonComponent = null;
+  switch (selectedLessonId) {
     case 1:
-      return <Lesson1 count={count} maxLimit={maxLimit} />;
+      lessonComponent = <Lesson1 limit={limit} max={max} />;
+      break;
     case 2:
-      return <Lesson2 count={count} maxLimit={maxLimit} />;
+      lessonComponent = <Lesson2 limit={limit} max={max} />;
+      break;
     case 3:
-      return <Lesson3 count={count} maxLimit={maxLimit} />;
+      lessonComponent = <Lesson3 limit={limit} max={max} />;
+      break;
     case 4:
-      return <Lesson4 count={count} maxLimit={maxLimit} />;
+      lessonComponent = <Lesson4 limit={limit} max={max} />;
+      break;
     default:
-      return <div>Select a lesson to view the worksheet.</div>;
+      lessonComponent = <div>Select a lesson to view the worksheet.</div>;
   }
+
+  return (
+    <div>
+      {lessons.length > 1 && (
+        <div className="print:hidden mb-4">
+          <label className="font-semibold mr-2">Select Lesson:</label>
+          <select
+            value={selectedLessonId}
+            onChange={e => setSelectedLessonId(Number(e.target.value))}
+            className="border rounded px-2 py-1"
+          >
+            {lessons.map((lesson: any) => (
+              <option key={lesson.id} value={lesson.id}>{lesson.name}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {lessonComponent}
+    </div>
+  );
 };
 
 export default Module3Worksheet;

@@ -6,51 +6,56 @@ import { Lesson4 } from './Lesson4';
 import { Lesson5 } from './Lesson5';
 import { Lesson6 } from './Lesson6';
 
-interface WorksheetProps {
-  lesson: number;
-}
+import { useWorksheet, defaultModules } from '../../WorksheetContext';
 
-const LESSON_TITLES = [
-  '',
-  'Face Value and Place Value',
-  'Expanded and Standard Forms',
-  'Before, After, and Between (up to 200)',
-  'Comparing and Ordering Numbers',
-  'Ordinal Numbers (11 to 200)',
-  'Even and Odd Numbers',
-];
-
-export default function Module2Worksheet({ lesson }: WorksheetProps) {
-const limit = 20;
-const min = 100;
-const max = 200;
+export default function Module2Worksheet() {
+  const { selectedLessonId, setSelectedLessonId } = useWorksheet();
+  // Get lessons from defaultModules
+  const lessons = defaultModules.find((m: any) => m.id === 2)?.lessons || [];
+  const selectedLesson = lessons.find((l: any) => l.id === selectedLessonId);
 
   let lessonComponent = null;
-  switch (lesson) {
-    case 1:
-      lessonComponent = <Lesson1 limit={limit} min={min} max={max} />;
-      break;
-    case 2:
-      lessonComponent = <Lesson2 limit={limit} min={min} max={max} />;
-      break;
-    case 3:
-      lessonComponent = <Lesson3 limit={limit} min={min} max={max} />;
-      break;
-    case 4:
-      lessonComponent = <Lesson4 limit={limit} min={min} max={max} />;
-      break;
-    case 5:
-      lessonComponent = <Lesson5 limit={limit} min={min} max={max} />;
-      break;
-    case 6:
-      lessonComponent = <Lesson6 limit={limit} min={min} max={max} />;
-      break;
-    default:
-      lessonComponent = null;
+  if (selectedLesson) {
+    switch (selectedLessonId) {
+      case 1:
+        lessonComponent = <Lesson1 limit={selectedLesson.limit} min={selectedLesson.min} max={selectedLesson.max} />;
+        break;
+      case 2:
+        lessonComponent = <Lesson2 limit={selectedLesson.limit} min={selectedLesson.min} max={selectedLesson.max} />;
+        break;
+      case 3:
+        lessonComponent = <Lesson3 limit={selectedLesson.limit} min={selectedLesson.min} max={selectedLesson.max} />;
+        break;
+      case 4:
+        lessonComponent = <Lesson4 limit={selectedLesson.limit} min={selectedLesson.min} max={selectedLesson.max} />;
+        break;
+      case 5:
+        lessonComponent = <Lesson5 limit={selectedLesson.limit} min={selectedLesson.min} max={selectedLesson.max} />;
+        break;
+      case 6:
+        lessonComponent = <Lesson6 limit={selectedLesson.limit} min={selectedLesson.min} max={selectedLesson.max} />;
+        break;
+      default:
+        lessonComponent = null;
+    }
   }
   return (
     <div className="worksheet">
-      <h2>{`Lesson ${lesson}: ${LESSON_TITLES[lesson]}`}</h2>
+      {lessons.length > 1 && (
+        <div className="print:hidden mb-4">
+          <label className="font-semibold mr-2">Select Lesson:</label>
+          <select
+            value={selectedLessonId}
+            onChange={e => setSelectedLessonId(Number(e.target.value))}
+            className="border rounded px-2 py-1"
+          >
+            {lessons.map((lesson: any) => (
+              <option key={lesson.id} value={lesson.id}>{lesson.name}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      <h2>{`Lesson ${selectedLessonId}: ${selectedLesson?.name || ''}`}</h2>
       {lessonComponent}
     </div>
   );
