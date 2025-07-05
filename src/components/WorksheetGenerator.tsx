@@ -9,8 +9,9 @@ const WorksheetGeneratorInner = () => {
   const {
     modules,
     selectedModuleId,
+    selectedLessonIds,
     setSelectedModuleId,
-    setSelectedLessonId,
+    setSelectedLessonIds,
   } = useWorksheet();
 
   return (
@@ -28,7 +29,7 @@ const WorksheetGeneratorInner = () => {
               key={m.id}
               onClick={() => {
                 setSelectedModuleId(m.id);
-                setSelectedLessonId(m.lessons[0]?.id || 1);
+                setSelectedLessonIds([m.lessons[0]?.id || 1]);
               }}
               className={`px-4 py-2 rounded ${selectedModuleId === m.id ? 'bg-blue-700 text-white' : 'bg-gray-200'}`}
             >

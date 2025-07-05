@@ -9,53 +9,63 @@ import { Lesson6 } from './Lesson6';
 import { useWorksheet, defaultModules } from '../../WorksheetContext';
 
 export default function Module2Worksheet() {
-  const { selectedLessonId, setSelectedLessonId } = useWorksheet();
+  const { selectedLessonIds, setSelectedLessonIds } = useWorksheet();
   const lessons = defaultModules.find((m) => m.id === 2)?.lessons || [];
-  const selectedLesson = lessons.find((l) => l.id === selectedLessonId);
 
-  let lessonComponent = null;
-  if (selectedLesson) {
-    switch (selectedLessonId) {
+  const renderLessonComponent = (lesson: any) => {
+    switch (lesson.id) {
       case 1:
-        lessonComponent = <Lesson1 limit={selectedLesson.limit} min={selectedLesson.min} max={selectedLesson.max} />;
-        break;
+        return <Lesson1 key={lesson.id} limit={lesson.limit} min={lesson.min} max={lesson.max} />;
       case 2:
-        lessonComponent = <Lesson2 limit={selectedLesson.limit} min={selectedLesson.min} max={selectedLesson.max} />;
-        break;
+        return <Lesson2 key={lesson.id} limit={lesson.limit} min={lesson.min} max={lesson.max} />;
       case 3:
-        lessonComponent = <Lesson3 limit={selectedLesson.limit} min={selectedLesson.min} max={selectedLesson.max} />;
-        break;
+        return <Lesson3 key={lesson.id} limit={lesson.limit} min={lesson.min} max={lesson.max} />;
       case 4:
-        lessonComponent = <Lesson4 limit={selectedLesson.limit} min={selectedLesson.min} max={selectedLesson.max} />;
-        break;
+        return <Lesson4 key={lesson.id} limit={lesson.limit} min={lesson.min} max={lesson.max} />;
       case 5:
-        lessonComponent = <Lesson5 limit={selectedLesson.limit} min={selectedLesson.min} max={selectedLesson.max} />;
-        break;
+        return <Lesson5 key={lesson.id} limit={lesson.limit} min={lesson.min} max={lesson.max} />;
       case 6:
-        lessonComponent = <Lesson6 limit={selectedLesson.limit} min={selectedLesson.min} max={selectedLesson.max} />;
-        break;
+        return <Lesson6 key={lesson.id} limit={lesson.limit} min={lesson.min} max={lesson.max} />;
       default:
-        lessonComponent = null;
-    }
-  }
+        return null;
+}
+  };
+
   return (
     <div className="worksheet">
       {lessons.length > 1 && (
         <div className="print:hidden mb-4">
-          <label className="font-semibold mr-2">Select Lesson:</label>
-          <select
-            value={selectedLessonId}
-            onChange={e => setSelectedLessonId(Number(e.target.value))}
-            className="border rounded px-2 py-1"
-          >
+          <label className="font-semibold mr-2">Select Lessons:</label>
+          <div className="flex flex-wrap gap-2">
             {lessons.map((lesson) => (
-              <option key={lesson.id} value={lesson.id}>{lesson.name}</option>
+              <label key={lesson.id} className="flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  checked={selectedLessonIds.includes(lesson.id)}
+                  onChange={e => {
+                    if (e.target.checked) {
+                      setSelectedLessonIds([...selectedLessonIds, lesson.id]);
+                    } else {
+                      setSelectedLessonIds(selectedLessonIds.filter(id => id !== lesson.id));
+                    }
+                  }}
+                />
+                {lesson.name}
+              </label>
             ))}
-          </select>
+          </div>
         </div>
       )}
-      <h2>{`Lesson ${selectedLessonId}: ${selectedLesson?.name || ''}`}</h2>
-      {lessonComponent}
+      {selectedLessonIds.length > 0 && selectedLessonIds.map((lessonId, idx) => {
+        const lesson = lessons.find(l => l.id === lessonId);
+        if (!lesson) return null;
+        return (
+          <div key={lesson.id} className={idx > 0 ? 'mb-6 print:break-before-page' : 'mb-6'}>
+            <h2>{`Lesson ${lesson.id}: ${lesson.name}`}</h2>
+            {renderLessonComponent(lesson)}
+          </div>
+        );
+      })}
     </div>
   );
 }

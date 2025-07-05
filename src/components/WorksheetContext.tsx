@@ -19,9 +19,9 @@ export type Module = {
 export type WorksheetState = {
     modules: Module[];
     selectedModuleId: number;
-    selectedLessonId: number;
+    selectedLessonIds: number[];
     setSelectedModuleId: (id: number) => void;
-    setSelectedLessonId: (id: number) => void;
+    setSelectedLessonIds: (ids: number[]) => void;
 };
 
 export const defaultModules: Module[] = [
@@ -34,7 +34,7 @@ export const defaultModules: Module[] = [
                 id: 1,
                 type: 'Addition',
                 name: 'Module 1: Addition Worksheet',
-                limit: 36,
+                limit: 42,
                 min: 1,
                 max: 100,
             },
@@ -42,18 +42,10 @@ export const defaultModules: Module[] = [
                 id: 2,
                 type: 'Subtraction',
                 name: 'Module 1: Subtraction Worksheet',
-                limit: 36,
+                limit: 42,
                 min: 1,
                 max: 100,
-            },
-            {
-                id: 3,
-                type: 'All',
-                name: '',
-                limit: 36,
-                min: 1,
-                max: 100,
-            },
+            }
         ],
     },
     {
@@ -86,16 +78,16 @@ const WorksheetContext = createContext<WorksheetState | undefined>(undefined);
 
 export const WorksheetProvider = ({ children }: { children: ReactNode }) => {
     const [selectedModuleId, setSelectedModuleId] = useState<number>(1);
-    const [selectedLessonId, setSelectedLessonId] = useState<number>(1);
+    const [selectedLessonIds, setSelectedLessonIds] = useState<number[]>([1]);
 
     return (
         <WorksheetContext.Provider
             value={{
                 modules: defaultModules,
                 selectedModuleId,
-                selectedLessonId,
+                selectedLessonIds,
                 setSelectedModuleId,
-                setSelectedLessonId,
+                setSelectedLessonIds,
             }}
         >
             {children}

@@ -8,47 +8,59 @@ import { useWorksheet, defaultModules } from '../../WorksheetContext';
 
 
 export const Module3Worksheet: React.FC = () => {
-  const { selectedLessonId, setSelectedLessonId } = useWorksheet();
+  const { selectedLessonIds, setSelectedLessonIds } = useWorksheet();
   const lessons = defaultModules.find((m) => m.id === 3)?.lessons || [];
-  const selectedLesson = lessons.find((lesson) => lesson.id === selectedLessonId);
-  const limit = selectedLesson?.limit ?? 25;
-  const max = selectedLesson?.max ?? 1000;
 
-  let lessonComponent = null;
-  switch (selectedLessonId) {
-    case 1:
-      lessonComponent = <Lesson1 limit={limit} max={max} />;
-      break;
-    case 2:
-      lessonComponent = <Lesson2 limit={limit} max={max} />;
-      break;
-    case 3:
-      lessonComponent = <Lesson3 limit={limit} max={max} />;
-      break;
-    case 4:
-      lessonComponent = <Lesson4 limit={limit} max={max} />;
-      break;
-    default:
-      lessonComponent = <div>Select a lesson to view the worksheet.</div>;
-  }
+  const renderLessonComponent = (lesson: any) => {
+    switch (lesson.id) {
+      case 1:
+        return <Lesson1 key={lesson.id} limit={lesson.limit} max={lesson.max} />;
+      case 2:
+        return <Lesson2 key={lesson.id} limit={lesson.limit} max={lesson.max} />;
+      case 3:
+        return <Lesson3 key={lesson.id} limit={lesson.limit} max={lesson.max} />;
+      case 4:
+        return <Lesson4 key={lesson.id} limit={lesson.limit} max={lesson.max} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <div>
       {lessons.length > 1 && (
         <div className="print:hidden mb-4">
-          <label className="font-semibold mr-2">Select Lesson:</label>
-          <select
-            value={selectedLessonId}
-            onChange={e => setSelectedLessonId(Number(e.target.value))}
-            className="border rounded px-2 py-1"
-          >
+          <label className="font-semibold mr-2">Select Lessons:</label>
+          <div className="flex flex-wrap gap-2">
             {lessons.map((lesson) => (
-              <option key={lesson.id} value={lesson.id}>{lesson.name}</option>
+              <label key={lesson.id} className="flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  checked={selectedLessonIds.includes(lesson.id)}
+                  onChange={e => {
+                    if (e.target.checked) {
+                      setSelectedLessonIds([...selectedLessonIds, lesson.id]);
+                    } else {
+                      setSelectedLessonIds(selectedLessonIds.filter(id => id !== lesson.id));
+                    }
+                  }}
+                />
+                {lesson.name}
+              </label>
             ))}
-          </select>
+          </div>
         </div>
       )}
-      {lessonComponent}
+      {selectedLessonIds.length > 0 && selectedLessonIds.map((lessonId, idx) => {
+        const lesson = lessons.find(l => l.id === lessonId);
+        if (!lesson) return null;
+        return (
+          <div key={lesson.id} className={idx > 0 ? 'mb-6 print:break-before-page' : 'mb-6'}>
+            <h2>{`Lesson ${lesson.id}: ${lesson.name}`}</h2>
+            {renderLessonComponent(lesson)}
+          </div>
+        );
+      })}
     </div>
   );
 };
