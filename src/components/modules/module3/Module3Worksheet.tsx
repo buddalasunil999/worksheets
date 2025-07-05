@@ -9,8 +9,8 @@ import { useWorksheet, defaultModules } from '../../WorksheetContext';
 
 export const Module3Worksheet: React.FC = () => {
   const { selectedLessonId, setSelectedLessonId } = useWorksheet();
-  const lessons = defaultModules.find((m: any) => m.id === 3)?.lessons || [];
-  const selectedLesson = lessons.find((lesson: any) => lesson.id === selectedLessonId);
+  const lessons = defaultModules.find((m) => m.id === 3)?.lessons || [];
+  const selectedLesson = lessons.find((lesson) => lesson.id === selectedLessonId);
   const limit = selectedLesson?.limit ?? 25;
   const max = selectedLesson?.max ?? 1000;
 
@@ -42,7 +42,7 @@ export const Module3Worksheet: React.FC = () => {
             onChange={e => setSelectedLessonId(Number(e.target.value))}
             className="border rounded px-2 py-1"
           >
-            {lessons.map((lesson: any) => (
+            {lessons.map((lesson) => (
               <option key={lesson.id} value={lesson.id}>{lesson.name}</option>
             ))}
           </select>

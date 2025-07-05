@@ -5,14 +5,14 @@ import { useWorksheet, defaultModules } from '../../WorksheetContext';
 
 export default function Module1Worksheet() {
   const { selectedLessonId, setSelectedLessonId } = useWorksheet();
-  const lessons = defaultModules.find((m: any) => m.id === 1)?.lessons || [];
-  const selectedLesson = lessons.find((lesson: any) => lesson.id === selectedLessonId);
+  const lessons = defaultModules.find((m) => m.id === 1)?.lessons || [];
+  const selectedLesson = lessons.find((lesson) => lesson.id === selectedLessonId);
 
   return (
     <div className="mb-8 print:mb-4">
       <div className="print:hidden">
         <div className="flex gap-2 mb-4">
-          {lessons.map((lesson: any) => (
+          {lessons.map((lesson) => (
             <button
               key={lesson.id}
               onClick={() => setSelectedLessonId(lesson.id)}

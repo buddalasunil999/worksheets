@@ -9,13 +9,9 @@ const WorksheetGeneratorInner = () => {
   const {
     modules,
     selectedModuleId,
-    selectedLessonId,
     setSelectedModuleId,
     setSelectedLessonId,
   } = useWorksheet();
-
-  const selectedModule = modules.find(m => m.id === selectedModuleId);
-  const lessons = selectedModule?.lessons || [];
 
   return (
     <div className="max-w-4xl mx-auto">

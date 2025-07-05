@@ -10,9 +10,8 @@ import { useWorksheet, defaultModules } from '../../WorksheetContext';
 
 export default function Module2Worksheet() {
   const { selectedLessonId, setSelectedLessonId } = useWorksheet();
-  // Get lessons from defaultModules
-  const lessons = defaultModules.find((m: any) => m.id === 2)?.lessons || [];
-  const selectedLesson = lessons.find((l: any) => l.id === selectedLessonId);
+  const lessons = defaultModules.find((m) => m.id === 2)?.lessons || [];
+  const selectedLesson = lessons.find((l) => l.id === selectedLessonId);
 
   let lessonComponent = null;
   if (selectedLesson) {
@@ -49,7 +48,7 @@ export default function Module2Worksheet() {
             onChange={e => setSelectedLessonId(Number(e.target.value))}
             className="border rounded px-2 py-1"
           >
-            {lessons.map((lesson: any) => (
+            {lessons.map((lesson) => (
               <option key={lesson.id} value={lesson.id}>{lesson.name}</option>
             ))}
           </select>
