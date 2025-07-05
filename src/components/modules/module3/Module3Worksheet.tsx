@@ -1,8 +1,4 @@
 import React from 'react';
-import Lesson1 from './Lesson1';
-import Lesson2 from './Lesson2';
-import Lesson3 from './Lesson3';
-import Lesson4 from './Lesson4';
 
 import { useWorksheet, defaultModules } from '../../WorksheetContext';
 
@@ -11,19 +7,12 @@ export const Module3Worksheet: React.FC = () => {
   const { selectedLessonIds, setSelectedLessonIds } = useWorksheet();
   const lessons = defaultModules.find((m) => m.id === 3)?.lessons || [];
 
-  const renderLessonComponent = (lesson: any) => {
-    switch (lesson.id) {
-      case 1:
-        return <Lesson1 key={lesson.id} limit={lesson.limit} max={lesson.max} />;
-      case 2:
-        return <Lesson2 key={lesson.id} limit={lesson.limit} max={lesson.max} />;
-      case 3:
-        return <Lesson3 key={lesson.id} limit={lesson.limit} max={lesson.max} />;
-      case 4:
-        return <Lesson4 key={lesson.id} limit={lesson.limit} max={lesson.max} />;
-      default:
-        return null;
-    }
+  // Use the component from lesson definition
+  const renderLessonComponent = (lesson: import('../../WorksheetContext').Lesson) => {
+    if (!lesson.component || !React.isValidElement(lesson.component)) return null;
+    return React.isValidElement(lesson.component)
+      ? React.cloneElement(lesson.component, {})
+      : null;
   };
 
   return (

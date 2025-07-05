@@ -1,12 +1,14 @@
-import { Addition } from "./Addition";
-import { Subtraction } from "./Subtraction";
-
-import { useWorksheet, defaultModules } from '../../WorksheetContext';
 import React from "react";
+import { useWorksheet, defaultModules } from '../../WorksheetContext';
 
 export default function Module1Worksheet() {
   const { selectedLessonIds, setSelectedLessonIds } = useWorksheet();
   const lessons = defaultModules.find((m) => m.id === 1)?.lessons || [];
+  
+  const renderLessonComponent = (lesson: any) => {
+    if (!lesson.component) return null;
+    return React.cloneElement(lesson.component, { key: lesson.id, limit: lesson.limit, min: lesson.min, max: lesson.max });
+  };
 
   return (
     <div className="mb-8 print:mb-4">
@@ -33,26 +35,15 @@ export default function Module1Worksheet() {
           <h2 className="text-xl font-bold">Module 1: Addition & Subtraction Worksheet</h2>
         </div>
       </div>
-      {selectedLessonIds.map((lessonId, idx) => {
+      {selectedLessonIds.length > 0 && selectedLessonIds.map((lessonId, idx) => {
         const lesson = lessons.find(l => l.id === lessonId);
         if (!lesson) return null;
-        let content = null;
-        if (lessonId === 1) {
-          content = <Addition key={lessonId} numberOfLessons={lesson.limit} max={lesson.max} />;
-        } else if (lessonId === 2) {
-          content = <Subtraction key={lessonId} numberOfLessons={lesson.limit} max={lesson.max} />;
-        }
-        if (!content) return null;
-        // Add page break after each lesson except the last one
-        if (selectedLessonIds.length > 1 && idx < selectedLessonIds.length - 1) {
-          return (
-            <React.Fragment key={lessonId}>
-              {content}
-              <div className="print:break-after-page" />
-            </React.Fragment>
-          );
-        }
-        return content;
+        return (
+          <div key={lesson.id} className={idx > 0 ? 'mb-6 print:break-before-page' : 'mb-6'}>
+            <h2>{`Lesson ${lesson.id}: ${lesson.name}`}</h2>
+            {renderLessonComponent(lesson)}
+          </div>
+        );
       })}
     </div>
   );

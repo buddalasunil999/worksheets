@@ -30,23 +30,20 @@ export const generateAdditionProblems = (count: number, max: number): MathProble
 };
 
 interface AdditionProps {
-  numberOfLessons?: number;
+  limit?: number;
   max?: number;
 }
 
 
-export function Addition({ numberOfLessons = 10, max = 100 }: AdditionProps) {
+export function Addition({ limit = 10, max = 100 }: AdditionProps) {
   const [problems, setProblems] = useState<MathProblem[]>([]);
 
   useEffect(() => {
-      setProblems(generateAdditionProblems(numberOfLessons, max));
-  }, [numberOfLessons, max]);
+      setProblems(generateAdditionProblems(limit, max));
+  }, [limit, max]);
 
   return (
     <div className="mb-8 print:mb-4">
-      <div className="mb-4 text-center">
-        <h2 className="text-xl font-bold">Module 1: Addition Worksheet</h2>        
-      </div>
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-4">Double-Digit Addition</h3>
         <div className="grid grid-cols-6 gap-6">

@@ -30,22 +30,19 @@ export const generateSubtractionProblems = (count: number, max: number): MathPro
 };
 
 interface SubtractionProps {
-  numberOfLessons?: number;
+  limit?: number;
   max?: number;
 }
 
 
-export function Subtraction({ numberOfLessons = 10, max = 100 }: SubtractionProps) {
+export function Subtraction({ limit = 10, max = 100 }: SubtractionProps) {
   const [problems, setProblems] = useState<MathProblem[]>([]);
 
   useEffect(() => {
-      setProblems(generateSubtractionProblems(numberOfLessons, max));
-  }, [numberOfLessons, max]);
+      setProblems(generateSubtractionProblems(limit, max));
+  }, [limit, max]);
   return (
     <div className="mb-8 print:mb-4">
-      <div className="mb-4 text-center">
-        <h2 className="text-xl font-bold">Module 1: Subtraction Worksheet</h2>
-      </div>
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-4">Double-Digit Subtraction</h3>
         <div className="grid grid-cols-6 gap-6">

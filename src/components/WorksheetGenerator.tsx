@@ -9,7 +9,6 @@ const WorksheetGeneratorInner = () => {
   const {
     modules,
     selectedModuleId,
-    selectedLessonIds,
     setSelectedModuleId,
     setSelectedLessonIds,
   } = useWorksheet();
