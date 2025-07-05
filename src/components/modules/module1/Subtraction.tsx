@@ -40,7 +40,7 @@ export function Subtraction({ numberOfLessons = 10, max = 100 }: SubtractionProp
 
   useEffect(() => {
       setProblems(generateSubtractionProblems(numberOfLessons, max));
-  }, [max]);
+  }, [numberOfLessons, max]);
   return (
     <div className="mb-8 print:mb-4">
       <div className="mb-4 text-center">

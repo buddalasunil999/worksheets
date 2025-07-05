@@ -40,7 +40,7 @@ export function Addition({ numberOfLessons = 10, max = 100 }: AdditionProps) {
 
   useEffect(() => {
       setProblems(generateAdditionProblems(numberOfLessons, max));
-  }, [max]);
+  }, [numberOfLessons, max]);
 
   return (
     <div className="mb-8 print:mb-4">
