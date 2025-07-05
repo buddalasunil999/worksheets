@@ -34,8 +34,9 @@ interface SubtractionProps {
   max?: number;
 }
 
-export function Subtraction({ numberOfLessons = 10, max = 100 }: SubtractionProps) {  
-  const [problems, setProblems] = useState<any[]>([]);
+
+export function Subtraction({ numberOfLessons = 10, max = 100 }: SubtractionProps) {
+  const [problems, setProblems] = useState<MathProblem[]>([]);
 
   useEffect(() => {
       setProblems(generateSubtractionProblems(numberOfLessons, max));

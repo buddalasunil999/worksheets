@@ -38,7 +38,7 @@ const Lesson4: React.FC<Lesson4Props> = ({ count, maxLimit }) => {
   }
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-2">Lesson 4: Skip-Counting by 100's</h3>
+      <h3 className="text-lg font-semibold mb-2">Lesson 4: Skip-Counting by 100&apos;s</h3>
       <p className="mb-2">Fill in the missing numbers (count by 100s):</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 print-grid-2">
         {/* Example */}

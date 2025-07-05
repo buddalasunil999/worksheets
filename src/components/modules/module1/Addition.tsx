@@ -34,8 +34,9 @@ interface AdditionProps {
   max?: number;
 }
 
-export function Addition({ numberOfLessons = 10, max = 100 }: AdditionProps) {  
-  const [problems, setProblems] = useState<any[]>([]);
+
+export function Addition({ numberOfLessons = 10, max = 100 }: AdditionProps) {
+  const [problems, setProblems] = useState<MathProblem[]>([]);
 
   useEffect(() => {
       setProblems(generateAdditionProblems(numberOfLessons, max));
