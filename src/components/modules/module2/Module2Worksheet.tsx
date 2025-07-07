@@ -1,5 +1,5 @@
 import React from 'react';
-import { useWorksheet, defaultModules, Lesson } from '../../WorksheetContext';
+import { useWorksheet, defaultModules } from '../../WorksheetContext';
 
 export default function Module2Worksheet() {
   const { selectedLessonIds, setSelectedLessonIds } = useWorksheet();
