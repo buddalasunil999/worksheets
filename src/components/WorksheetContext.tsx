@@ -81,8 +81,8 @@ export const defaultModules: Module[] = [
         name: 'Module 3',
         description: 'Module 3: Recognizing Patterns in Hundreds',
         lessons: [
-            { id: 1, type: 'patterns', name: 'Recognizing Patterns in Hundreds', limit: 25, min: 1, max: 1000, component: <Lesson1_M3 limit={25} max={1000} /> },
-            { id: 2, type: 'skip-5s', name: 'Skip-Counting by 5s', limit: 50, min: 1, max: 1000, component: <Lesson2_M3 limit={40} max={1000} /> },
+            { id: 1, type: 'patterns', name: 'Recognizing Patterns in Hundreds', limit: 24, min: 1, max: 1000, component: <Lesson1_M3 limit={24} max={1000} /> },
+            { id: 2, type: 'skip-5s', name: 'Skip-Counting by 5s', limit: 38, min: 1, max: 1000, component: <Lesson2_M3 limit={38} max={1000} /> },
             { id: 3, type: 'skip-10s', name: 'Skip-Counting by 10s', limit: 25, min: 1, max: 1000, component: <Lesson3_M3 limit={25} max={1000} /> },
             { id: 4, type: 'skip-100s', name: 'Skip-Counting by 100s', limit: 25, min: 1, max: 1000, component: <Lesson4_M3 limit={25} max={1000} /> },
         ],
