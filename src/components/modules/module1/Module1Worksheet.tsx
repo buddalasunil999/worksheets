@@ -4,13 +4,6 @@ import { useWorksheet, defaultModules, Lesson } from '../../WorksheetContext';
 export default function Module1Worksheet() {
   const { selectedLessonIds, setSelectedLessonIds } = useWorksheet();
   const lessons = defaultModules.find((m) => m.id === 1)?.lessons || [];
-  
-  const renderLessonComponent = (lesson: Lesson) => {
-      if (!lesson.component || !React.isValidElement(lesson.component)
-      || typeof lesson.component !== "function") return null;
-  
-      return React.createElement(lesson.component, { limit: lesson.limit, min: lesson.min, max: lesson.max });
-  };
 
   return (
     <div className="mb-8 print:mb-4">
@@ -43,7 +36,7 @@ export default function Module1Worksheet() {
         return (
           <div key={lesson.id} className={idx > 0 ? 'mb-6 print:break-before-page' : 'mb-6'}>
             <h2>{`Lesson ${lesson.id}: ${lesson.name}`}</h2>
-            {renderLessonComponent(lesson)}
+            {lesson.component}
           </div>
         );
       })}

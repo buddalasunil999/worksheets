@@ -5,13 +5,6 @@ export default function Module2Worksheet() {
   const { selectedLessonIds, setSelectedLessonIds } = useWorksheet();
   const lessons = defaultModules.find((m) => m.id === 2)?.lessons || [];
 
-  const renderLessonComponent = (lesson: Lesson) => {
-    if (!lesson.component || !React.isValidElement(lesson.component)
-    || typeof lesson.component !== "function") return null;
-
-    return React.createElement(lesson.component, { limit: lesson.limit, min: lesson.min, max: lesson.max });
-  };
-
   return (
     <div className="worksheet">
       {lessons.length > 1 && (
@@ -43,7 +36,7 @@ export default function Module2Worksheet() {
         return (
           <div key={lesson.id} className={idx > 0 ? 'mb-6 print:break-before-page' : 'mb-6'}>
             <h2>{`Lesson ${lesson.id}: ${lesson.name}`}</h2>
-            {renderLessonComponent(lesson)}
+            {lesson.component}
           </div>
         );
       })}
