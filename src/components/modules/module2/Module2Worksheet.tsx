@@ -1,15 +1,15 @@
 import React from 'react';
-import { useWorksheet, defaultModules } from '../../WorksheetContext';
+import { useWorksheet, defaultModules, Lesson } from '../../WorksheetContext';
 
 export default function Module2Worksheet() {
   const { selectedLessonIds, setSelectedLessonIds } = useWorksheet();
   const lessons = defaultModules.find((m) => m.id === 2)?.lessons || [];
 
-  const renderLessonComponent = (lesson: import('../../WorksheetContext').Lesson) => {
-    if (!lesson.component || !React.isValidElement(lesson.component)) return null;
-    return React.isValidElement(lesson.component)
-      ? React.cloneElement(lesson.component, {})
-      : null;
+  const renderLessonComponent = (lesson: Lesson) => {
+    if (!lesson.component || !React.isValidElement(lesson.component)
+    || typeof lesson.component !== "function") return null;
+
+    return React.createElement(lesson.component, { limit: lesson.limit, min: lesson.min, max: lesson.max });
   };
 
   return (
