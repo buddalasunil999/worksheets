@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { useWorksheet, defaultModules } from '../../WorksheetContext';
+import { useWorksheet } from '../../WorksheetContext';
 
 
 export const Module3Worksheet: React.FC = () => {
-  const { selectedLessonIds, setSelectedLessonIds } = useWorksheet();
-  const lessons = defaultModules.find((m) => m.id === 3)?.lessons || [];
+  const { modules, selectedLessonIds, setSelectedLessonIds } = useWorksheet();
+  const lessons = modules.find((m) => m.id === 3)?.lessons || [];
 
   // Use the component from lesson definition
   const renderLessonComponent = (lesson: import('../../WorksheetContext').Lesson) => {

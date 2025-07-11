@@ -39,7 +39,7 @@ export type WorksheetState = {
     setSelectedLessonIds: (ids: number[]) => void;
 };
 
-export const defaultModules: Module[] = [
+const defaultModules: Module[] = [
     {
         id: 1,
         name: 'Module 1',
@@ -168,13 +168,14 @@ export const defaultModules: Module[] = [
 const WorksheetContext = createContext<WorksheetState | undefined>(undefined);
 
 export const WorksheetProvider = ({ children }: { children: ReactNode }) => {
+    const [modules] = useState<Module[]>(defaultModules);
     const [selectedModuleId, setSelectedModuleId] = useState<number>(1);
     const [selectedLessonIds, setSelectedLessonIds] = useState<number[]>([1]);
 
     return (
         <WorksheetContext.Provider
             value={{
-                modules: defaultModules,
+                modules,
                 selectedModuleId,
                 selectedLessonIds,
                 setSelectedModuleId,

@@ -1,9 +1,9 @@
 import React from 'react';
-import { useWorksheet, defaultModules } from '../../WorksheetContext';
+import { useWorksheet } from '../../WorksheetContext';
 
 export default function Module2Worksheet() {
-  const { selectedLessonIds, setSelectedLessonIds } = useWorksheet();
-  const lessons = defaultModules.find((m) => m.id === 2)?.lessons || [];
+  const { modules, selectedLessonIds, setSelectedLessonIds } = useWorksheet();
+  const lessons = modules.find((m) => m.id === 2)?.lessons || [];
 
   return (
     <div className="worksheet">
