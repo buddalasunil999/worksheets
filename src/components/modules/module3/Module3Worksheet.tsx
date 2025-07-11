@@ -1,9 +1,8 @@
 import React from 'react';
-
 import { useWorksheet } from '../../WorksheetContext';
+import { LessonPropsEditor } from '../../LessonPropsEditor';
 
-
-export const Module3Worksheet: React.FC = () => {
+const Module3Worksheet: React.FC = () => {
   const { modules, selectedLessonIds, setSelectedLessonIds } = useWorksheet();
   const lessons = modules.find((m) => m.id === 3)?.lessons || [];
 
@@ -43,6 +42,11 @@ export const Module3Worksheet: React.FC = () => {
         if (!lesson) return null;
         return (
           <div key={lesson.id} className={idx > 0 ? 'mb-6 print:break-before-page' : 'mb-6'}>
+            <LessonPropsEditor
+              key={lesson.id}
+              moduleId={3}
+              lesson={lesson}
+            />
             <h2>{`Lesson ${lesson.id}: ${lesson.name}`}</h2>
             {renderLessonComponent(lesson)}
           </div>

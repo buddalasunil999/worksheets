@@ -37,6 +37,7 @@ export type WorksheetState = {
     selectedLessonIds: number[];
     setSelectedModuleId: (id: number) => void;
     setSelectedLessonIds: (ids: number[]) => void;
+    updateLessonProps: (moduleId: number, lessonId: number, newProps: Partial<Lesson['props']>) => void;
 };
 
 const defaultModules: Module[] = [
@@ -168,9 +169,26 @@ const defaultModules: Module[] = [
 const WorksheetContext = createContext<WorksheetState | undefined>(undefined);
 
 export const WorksheetProvider = ({ children }: { children: ReactNode }) => {
-    const [modules] = useState<Module[]>(defaultModules);
+    const [modules, setModules] = useState<Module[]>(defaultModules);
     const [selectedModuleId, setSelectedModuleId] = useState<number>(1);
     const [selectedLessonIds, setSelectedLessonIds] = useState<number[]>([1]);
+
+    // Update lesson props in context
+    const updateLessonProps = (moduleId: number, lessonId: number, newProps: Partial<Lesson['props']>) => {
+        setModules(prevModules => prevModules.map(module => {
+            if (module.id !== moduleId) return module;
+            return {
+                ...module,
+                lessons: module.lessons.map(lesson => {
+                    if (lesson.id !== lessonId) return lesson;
+                    return {
+                        ...lesson,
+                        props: { ...lesson.props, ...newProps }
+                    };
+                })
+            };
+        }));
+    };
 
     return (
         <WorksheetContext.Provider
@@ -180,6 +198,7 @@ export const WorksheetProvider = ({ children }: { children: ReactNode }) => {
                 selectedLessonIds,
                 setSelectedModuleId,
                 setSelectedLessonIds,
+                updateLessonProps,
             }}
         >
             {children}

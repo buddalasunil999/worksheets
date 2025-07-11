@@ -1,5 +1,6 @@
 import React from "react";
 import { useWorksheet } from '../../WorksheetContext';
+import { LessonPropsEditor } from '../../LessonPropsEditor';
 
 export default function Module1Worksheet() {
   const { modules, selectedLessonIds, setSelectedLessonIds } = useWorksheet();
@@ -19,7 +20,7 @@ export default function Module1Worksheet() {
                     setSelectedLessonIds([...selectedLessonIds, lesson.id]);
                   } else {
                     setSelectedLessonIds(selectedLessonIds.filter(id => id !== lesson.id));
-}
+                  }
                 }}
               />
               {lesson.type}
@@ -35,6 +36,11 @@ export default function Module1Worksheet() {
         if (!lesson) return null;
         return (
           <div key={lesson.id} className={idx > 0 ? 'mb-6 print:break-before-page' : 'mb-6'}>
+            <LessonPropsEditor
+              key={lesson.id}
+              moduleId={1}
+              lesson={lesson}
+            />
             <h2>{`Lesson ${lesson.id}: ${lesson.name}`}</h2>
             {React.createElement(lesson.component, lesson.props)}
           </div>
