@@ -12,13 +12,7 @@ interface Lesson2Props {
 }
 
 export function Lesson2({ limit, min, max }: Lesson2Props) {
-  const problems = Array.from({ length: limit }, () => {
-    let p;
-    do {
-      p = generateExpandedStandardProblems(1)[0];
-    } while (p.number < min || p.number > max);
-    return p;
-  });
+  const problems = generateExpandedStandardProblems(limit, min, max);
   return (
     <ul>
       {/* Example (first problem, solved) */}
@@ -35,12 +29,23 @@ export function Lesson2({ limit, min, max }: Lesson2Props) {
   );
 }
 
-export function generateExpandedStandardProblems(count: number): ExpandedStandardProblem[] {
+export function generateExpandedStandardProblems(count: number, min: number, max: number): ExpandedStandardProblem[] {
   const problems: ExpandedStandardProblem[] = [];
   for (let i = 0; i < count; i++) {
-    const num = Math.floor(Math.random() * 900) + 100;
-    const digits = num.toString().split('').map(Number);
-    const expanded = `${digits[0]}00 + ${digits[1]}0 + ${digits[2]}`;
+    let num = Math.floor(Math.random() * (max - min + 1)) + min;
+    // Ensure unique problems and within range
+    while (problems.some(p => p.number === num)) {
+      num = Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    const digits = num.toString().split("").map(Number);
+    // Build expanded form for any number of digits
+    const expanded = digits
+      .map((d, idx) => {
+        const place = digits.length - idx - 1;
+        return d === 0 ? null : `${d}${"0".repeat(place)}`;
+      })
+      .filter(Boolean)
+      .join(" + ");
     problems.push({
       number: num,
       expanded,

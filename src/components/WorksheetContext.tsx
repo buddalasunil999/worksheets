@@ -91,7 +91,7 @@ const defaultModules: Module[] = [
                     max: 200,
                 }
             },
-            { id: 3, type: 'before-after-between', name: 'Before, After, and Between (up to 200)',
+            { id: 3, type: 'before-after-between', name: 'Before, After, and Between',
                 component: Module2Lesson3,
                 props: {
                     limit: 20,

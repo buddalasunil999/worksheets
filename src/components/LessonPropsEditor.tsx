@@ -26,6 +26,7 @@ export const LessonPropsEditor: React.FC<LessonPropsEditorProps> = ({ moduleId, 
                 Min:
                 <input
                     type="number"
+                    min={1}
                     value={lesson.props.min ?? ''}
                     className="border px-2 py-1 mx-1 w-16"
                     onChange={e => updateLessonProps(moduleId, lesson.id, { min: Number(e.target.value) })}
@@ -35,6 +36,7 @@ export const LessonPropsEditor: React.FC<LessonPropsEditorProps> = ({ moduleId, 
                 Max:
                 <input
                     type="number"
+                    min={1}
                     value={lesson.props.max ?? ''}
                     className="border px-2 py-1 mx-1 w-16"
                     onChange={e => updateLessonProps(moduleId, lesson.id, { max: Number(e.target.value) })}

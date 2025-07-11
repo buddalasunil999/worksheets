@@ -1,11 +1,11 @@
 import React from 'react';
 
-function generateSkip100Problems(limit: number, max: number) {
+function generateSkip100Problems(limit: number, min: number, max: number) {
   const problems = [];
   for (let i = 0; i < limit; i++) {
     // Find the highest possible start so the sequence doesn't exceed max
     const maxStart = Math.floor((max - 500) / 100) * 100;
-    const minStart = 100;
+    const minStart = min > 0 ? Math.ceil(min / 100) * 100 : 0;
     const range = Math.max(0, (maxStart - minStart) / 100 + 1);
     const start = range > 0 ? Math.floor(Math.random() * range) * 100 + minStart : minStart;
     const sequence = [];
@@ -26,11 +26,12 @@ function generateSkip100Problems(limit: number, max: number) {
 
 interface Lesson4Props {
   limit: number;
+  min: number;
   max: number;
 }
 
-const Lesson4: React.FC<Lesson4Props> = ({ limit, max }) => {
-  const problems = generateSkip100Problems(limit, max);
+const Lesson4: React.FC<Lesson4Props> = ({ limit, min, max }) => {
+  const problems = generateSkip100Problems(limit, min, max);
   const example = problems[0];
   function getExampleValue(idx: number) {
     const start = example.sequence.find((v) => v !== null) ?? 0;

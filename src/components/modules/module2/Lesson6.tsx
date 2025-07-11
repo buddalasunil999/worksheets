@@ -13,11 +13,7 @@ interface Lesson6Props {
 
 export function Lesson6({ limit, min, max }: Lesson6Props) {
   const problems = Array.from({ length: limit }, () => {
-    let p;
-    do {
-      p = generateEvenOddProblems(1)[0];
-    } while (p.number < min || p.number > max);
-    return p;
+    return generateEvenOddProblems(1, min, max)[0];
   });
   return (
     <ul>
@@ -35,10 +31,10 @@ export function Lesson6({ limit, min, max }: Lesson6Props) {
   );
 }
 
-export function generateEvenOddProblems(count: number): EvenOddProblem[] {
+export function generateEvenOddProblems(count: number, min: number, max: number): EvenOddProblem[] {
   const problems: EvenOddProblem[] = [];
   for (let i = 0; i < count; i++) {
-    const num = Math.floor(Math.random() * 190) + 11; // 11 to 200
+    const num = Math.floor(Math.random() * (max - min + 1)) + min;
     problems.push({
       number: num,
       type: num % 2 === 0 ? 'Even' : 'Odd',

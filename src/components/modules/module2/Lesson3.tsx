@@ -13,13 +13,8 @@ interface Lesson3Props {
 }
 
 export function Lesson3({ limit, min, max }: Lesson3Props) {
-  const problems = Array.from({ length: limit }, () => {
-    let p;
-    do {
-      p = generateBeforeAfterBetweenProblems(1)[0];
-    } while (p.number < min || p.number > max);
-    return p;
-  });
+  // Generate problems using new min/max logic
+  const problems = generateBeforeAfterBetweenProblems(limit, min, max);
   // Example (first problem, solved)
   const example = problems[0];
   // For the example, show all values filled in
@@ -66,10 +61,12 @@ export function Lesson3({ limit, min, max }: Lesson3Props) {
   );
 }
 
-export function generateBeforeAfterBetweenProblems(count: number): BeforeAfterBetweenProblem[] {
+export function generateBeforeAfterBetweenProblems(count: number, min: number, max: number): BeforeAfterBetweenProblem[] {
   const problems: BeforeAfterBetweenProblem[] = [];
   for (let i = 0; i < count; i++) {
-    const num = Math.floor(Math.random() * 198) + 2; // 2 to 199
+    const minNum = Math.max(min, 2);
+    const maxNum = Math.min(max, max - 1);
+    const num = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
     problems.push({
       before: num - 1,
       number: num,
