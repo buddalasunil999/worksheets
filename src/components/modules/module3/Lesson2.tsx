@@ -1,13 +1,12 @@
 import React from 'react';
 
-function generateSkip5Problems(limit: number, max: number) {
+function generateSkip5Problems(limit: number, min: number, max: number) {
   const problems = [];
   for (let i = 0; i < limit; i++) {
     // Find the highest possible start so the sequence doesn't exceed max
     const maxStart = Math.floor((max - 25) / 5) * 5;
-    const minStart = 100;
-    const range = Math.max(0, (maxStart - minStart) / 5 + 1);
-    const start = range > 0 ? Math.floor(Math.random() * range) * 5 + minStart : minStart;
+    const range = Math.max(0, (maxStart - min) / 5 + 1);
+    const start = range > 0 ? Math.floor(Math.random() * range) * 5 + min : min;
     const sequence = [];
     for (let j = 0; j < 6; j++) {
       const value = start + 5 * j;
@@ -26,11 +25,12 @@ function generateSkip5Problems(limit: number, max: number) {
 
 interface Lesson2Props {
   limit: number;
+  min: number;
   max: number;
 }
 
-const Lesson2: React.FC<Lesson2Props> = ({ limit, max }) => {
-  const problems = generateSkip5Problems(limit, max);
+const Lesson2: React.FC<Lesson2Props> = ({ limit, min, max }) => {
+  const problems = generateSkip5Problems(limit, min, max);
   const example = problems[0];
   function getExampleValue(idx: number) {
     // Find the first non-null value as the start
