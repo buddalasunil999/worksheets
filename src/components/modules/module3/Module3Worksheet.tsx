@@ -9,10 +9,8 @@ export const Module3Worksheet: React.FC = () => {
 
   // Use the component from lesson definition
   const renderLessonComponent = (lesson: import('../../WorksheetContext').Lesson) => {
-    if (!lesson.component || !React.isValidElement(lesson.component)) return null;
-    return React.isValidElement(lesson.component)
-      ? React.cloneElement(lesson.component, {})
-      : null;
+    if (!lesson.component) return null;
+    return React.createElement(lesson.component, lesson.props);
   };
 
   return (

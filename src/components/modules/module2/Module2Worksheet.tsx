@@ -36,7 +36,7 @@ export default function Module2Worksheet() {
         return (
           <div key={lesson.id} className={idx > 0 ? 'mb-6 print:break-before-page' : 'mb-6'}>
             <h2>{`Lesson ${lesson.id}: ${lesson.name}`}</h2>
-            {lesson.component}
+            {React.createElement(lesson.component, lesson.props)}
           </div>
         );
       })}

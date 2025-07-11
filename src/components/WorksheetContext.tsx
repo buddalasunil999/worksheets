@@ -16,10 +16,12 @@ export type Lesson = {
     id: number;
     type: string;
     name: string;
-    limit: number;
-    min: number;
-    max: number;
-    component: React.ReactNode;
+    component: React.ElementType;
+    props: {
+        limit: number;
+        min?: number;
+        max?: number;
+    }
 };
 
 export type Module = {
@@ -47,19 +49,23 @@ export const defaultModules: Module[] = [
                 id: 1,
                 type: 'Addition',
                 name: 'Double-Digit Addition',
-                limit: 42,
-                min: 1,
-                max: 100,
-                component: <Addition limit={42} max={100} />,
+                component: Addition,
+                props: {
+                    limit: 42,
+                    min: 1,
+                    max: 100,
+                }
             },
             {
                 id: 2,
                 type: 'Subtraction',
                 name: 'Double-Digit Subtraction',
-                limit: 42,
-                min: 1,
-                max: 100,
-                component: <Subtraction limit={42} max={100} />,
+                component: Subtraction,
+                props: {
+                    limit: 42,
+                    min: 1,
+                    max: 100,
+                }
             }
         ],
     },
@@ -68,12 +74,54 @@ export const defaultModules: Module[] = [
         name: 'Module 2',
         description: 'Module 2: Number Concepts',
         lessons: [
-            { id: 1, type: 'face-value', name: 'Face Value and Place Value', limit: 20, min: 100, max: 200, component: <Module2Lesson1 limit={20} min={100} max={200} /> },
-            { id: 2, type: 'expanded-form', name: 'Expanded and Standard Forms', limit: 20, min: 100, max: 200, component: <Module2Lesson2 limit={20} min={100} max={200} /> },
-            { id: 3, type: 'before-after-between', name: 'Before, After, and Between (up to 200)', limit: 20, min: 100, max: 200, component: <Module2Lesson3 limit={20} min={100} max={200} /> },
-            { id: 4, type: 'comparing-ordering', name: 'Comparing and Ordering Numbers', limit: 20, min: 100, max: 200, component: <Module2Lesson4 limit={20} min={100} max={200} /> },
-            { id: 5, type: 'ordinal', name: 'Ordinal Numbers (11 to 200)', limit: 20, min: 100, max: 200, component: <Module2Lesson5 limit={20} min={100} max={200} /> },
-            { id: 6, type: 'even-odd', name: 'Even and Odd Numbers', limit: 20, min: 100, max: 200, component: <Module2Lesson6 limit={20} min={100} max={200} /> },
+            { id: 1, type: 'face-value', name: 'Face Value and Place Value',
+                component: Module2Lesson1,
+                props: {
+                    limit: 20,
+                    min: 100,
+                    max: 200,
+                }
+            },
+            { id: 2, type: 'expanded-form', name: 'Expanded and Standard Forms',
+                component: Module2Lesson2,
+                props: {
+                    limit: 20,
+                    min: 100,
+                    max: 200,
+                }
+            },
+            { id: 3, type: 'before-after-between', name: 'Before, After, and Between (up to 200)',
+                component: Module2Lesson3,
+                props: {
+                    limit: 20,
+                    min: 100,
+                    max: 200,
+                }
+            },
+            { id: 4, type: 'comparing-ordering', name: 'Comparing and Ordering Numbers',
+                component: Module2Lesson4,
+                props: {
+                    limit: 20,
+                    min: 100,
+                    max: 200,
+                }
+            },
+            { id: 5, type: 'ordinal', name: 'Ordinal Numbers (11 to 200)',
+                component: Module2Lesson5,
+                props: {
+                    limit: 20,
+                    min: 100,
+                    max: 200,
+                }
+            },
+            { id: 6, type: 'even-odd', name: 'Even and Odd Numbers',
+                component: Module2Lesson6,
+                props: {
+                    limit: 20,
+                    min: 100,
+                    max: 200,
+                }
+            },
         ],
     },
     {
@@ -81,10 +129,38 @@ export const defaultModules: Module[] = [
         name: 'Module 3',
         description: 'Module 3: Recognizing Patterns in Hundreds',
         lessons: [
-            { id: 1, type: 'patterns', name: 'Recognizing Patterns in Hundreds', limit: 24, min: 1, max: 1000, component: <Lesson1_M3 limit={24} max={1000} /> },
-            { id: 2, type: 'skip-5s', name: 'Skip-Counting by 5s', limit: 34, min: 1, max: 1000, component: <Lesson2_M3 limit={34} max={1000} /> },
-            { id: 3, type: 'skip-10s', name: 'Skip-Counting by 10s', limit: 31, min: 1, max: 1000, component: <Lesson3_M3 limit={31} max={1000} /> },
-            { id: 4, type: 'skip-100s', name: 'Skip-Counting by 100s', limit: 31, min: 1, max: 1000, component: <Lesson4_M3 limit={31} max={1000} /> },
+            { id: 1, type: 'patterns', name: 'Recognizing Patterns in Hundreds',
+                component: Lesson1_M3,
+                props: {
+                    limit: 24,
+                    min: 1,
+                    max: 1000,
+                }
+            },
+            { id: 2, type: 'skip-5s', name: 'Skip-Counting by 5s',
+                component: Lesson2_M3,
+                props: {
+                    limit: 34,
+                    min: 1,
+                    max: 1000,
+                }
+            },
+            { id: 3, type: 'skip-10s', name: 'Skip-Counting by 10s',
+                component: Lesson3_M3,
+                props: {
+                    limit: 31,
+                    min: 1,
+                    max: 1000,
+                }
+            },
+            { id: 4, type: 'skip-100s', name: 'Skip-Counting by 100s',
+                component: Lesson4_M3,
+                props: {
+                    limit: 31,
+                    min: 1,
+                    max: 1000,
+                }
+            },
         ],
     },
 ];
