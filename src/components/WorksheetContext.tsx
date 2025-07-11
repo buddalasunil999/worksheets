@@ -49,7 +49,7 @@ const defaultModules: Module[] = [
             {
                 id: 1,
                 type: 'Addition',
-                name: 'Double-Digit Addition',
+                name: 'Addition',
                 component: Addition,
                 props: {
                     limit: 42,
@@ -60,7 +60,7 @@ const defaultModules: Module[] = [
             {
                 id: 2,
                 type: 'Subtraction',
-                name: 'Double-Digit Subtraction',
+                name: 'Subtraction',
                 component: Subtraction,
                 props: {
                     limit: 42,

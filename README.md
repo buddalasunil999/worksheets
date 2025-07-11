@@ -25,7 +25,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 This project is a web app for generating printable math worksheets. It features:
 
 ### Module 1: Addition & Subtraction
-- Randomly generated double-digit addition and subtraction problems
+- Randomly generated addition and subtraction problems
 - Two worksheet pages: one for addition, one for subtraction (36 problems each)
 
 ### Module 2: Number Concepts (Lessons 1–6)

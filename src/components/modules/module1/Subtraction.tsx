@@ -11,40 +11,40 @@ const generateNumber = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-export const generateSubtractionProblems = (count: number, max: number): MathProblem[] => {
+export const generateSubtractionProblems = (count: number, min: number, max: number): MathProblem[] => {
   const problems: MathProblem[] = [];
-  
+
   for (let i = 0; i < count; i++) {
-    const num1 = generateNumber(20, max - 1);
-    const num2 = generateNumber(10, num1 - 1); // Ensure num2 is smaller than num1
+    const num1 = generateNumber(2 * min, max - 1);
+    const num2 = generateNumber(min, num1 - 1);
     const answer = num1 - num2;
-    
+
     problems.push({
       num1,
       num2,
       answer,
     });
   }
-  
+
   return problems;
 };
 
 interface SubtractionProps {
   limit?: number;
+  min?: number;
   max?: number;
 }
 
 
-export function Subtraction({ limit = 10, max = 100 }: SubtractionProps) {
+export function Subtraction({ limit = 10, min = 1, max = 100 }: SubtractionProps) {
   const [problems, setProblems] = useState<MathProblem[]>([]);
 
   useEffect(() => {
-      setProblems(generateSubtractionProblems(limit, max));
+    setProblems(generateSubtractionProblems(limit, min, max));
   }, [limit, max]);
   return (
     <div className="mb-8 print:mb-4">
       <div className="mb-6">
-        <h3 className="text-lg font-semibold mb-4">Double-Digit Subtraction</h3>
         <div className="grid grid-cols-6 gap-6">
           {problems.map((problem, index) => (
             <div key={index} className="p-4 border rounded">
