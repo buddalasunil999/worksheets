@@ -36,10 +36,15 @@ export const LessonPropsEditor: React.FC<LessonPropsEditorProps> = ({ moduleId, 
                 Max:
                 <input
                     type="number"
-                    min={1}
+                    min={lesson.props.min ?? 1}
                     value={lesson.props.max ?? ''}
                     className="border px-2 py-1 mx-1 w-16"
-                    onChange={e => updateLessonProps(moduleId, lesson.id, { max: Number(e.target.value) })}
+                    onChange={e => {
+                        const maxValue = Number(e.target.value);
+                        if (maxValue >= (lesson.props.min ?? 1)) {
+                            updateLessonProps(moduleId, lesson.id, { max: maxValue });
+                        }
+                    }}
                 />
             </label>
         </div>
