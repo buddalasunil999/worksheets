@@ -13,16 +13,7 @@ interface Lesson4Props {
 }
 
 export function Lesson4({ limit, min, max }: Lesson4Props) {
-  const problems = Array.from({ length: limit }, () => {
-    let p;
-    do {
-      p = generateComparingOrderingProblems(1)[0];
-    } while (
-      p.a < min || p.a > max ||
-      p.b < min || p.b > max
-    );
-    return p;
-  });
+  const problems = generateComparingOrderingProblems(limit, min, max);
   return (
     <ul>
       {/* Example (first problem, solved) */}
@@ -39,11 +30,11 @@ export function Lesson4({ limit, min, max }: Lesson4Props) {
   );
 }
 
-export function generateComparingOrderingProblems(count: number): ComparingOrderingProblem[] {
+export function generateComparingOrderingProblems(count: number, min: number = 1, max: number = 999): ComparingOrderingProblem[] {
   const problems: ComparingOrderingProblem[] = [];
   for (let i = 0; i < count; i++) {
-    const a = Math.floor(Math.random() * 900) + 100;
-    const b = Math.floor(Math.random() * 900) + 100;
+    const a = Math.floor(Math.random() * (max - min + 1)) + min;
+    const b = Math.floor(Math.random() * (max - min + 1)) + min;
     problems.push({
       a,
       b,
