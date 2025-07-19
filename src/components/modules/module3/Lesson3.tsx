@@ -3,10 +3,11 @@ import React from 'react';
 function generateSkip10Problems(limit: number, min: number, max: number) {
   const problems = [];
   for (let i = 0; i < limit; i++) {
-    // Find the highest possible start so the sequence doesn't exceed max
+    // Find the lowest and highest possible start so the sequence doesn't exceed max, and both are multiples of 10
+    const minStart = Math.ceil(min / 10) * 10;
     const maxStart = Math.floor((max - 50) / 10) * 10;
-    const range = Math.max(0, (maxStart - min) / 10 + 1);
-    const start = range > 0 ? Math.floor(Math.random() * range) * 10 + min : min;
+    const range = Math.max(0, (maxStart - minStart) / 10 + 1);
+    const start = range > 0 ? Math.floor(Math.random() * range) * 10 + minStart : minStart;
     const sequence = [];
     for (let j = 0; j < 6; j++) {
       const value = start + 10 * j;
